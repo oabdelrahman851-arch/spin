@@ -3,40 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عجلة الحظ</title>
+<title>✦ عجلة الحظ ✦</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --bg2: #111118;
-    --bg3: #1a1a26;
-    --accent: #f0c040;
-    --accent2: #ff6b35;
-    --accent3: #7c3aed;
-    --text: #f0eee8;
-    --text2: #9998b0;
-    --border: rgba(255,255,255,0.08);
-    --glow: rgba(240,192,64,0.15);
+    --bg: #0f0c29;
+    --bg2: #1a1640;
+    --bg3: #24213e;
+    --accent: #ffcc00;
+    --accent2: #a777e3;
+    --accent3: #6e8efb;
+    --text: #ffffff;
+    --text2: rgba(255,255,255,0.55);
+    --glass: rgba(255,255,255,0.08);
+    --glass2: rgba(255,255,255,0.13);
+    --border: rgba(255,255,255,0.15);
+    --glow: rgba(255,204,0,0.2);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--bg);
+    background: linear-gradient(160deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background-attachment: fixed;
     color: var(--text);
     font-family: 'Cairo', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* BACKGROUND PARTICLES */
+  /* PARTICLES */
   #bg-canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.4;
+    opacity: 0.5;
   }
 
   .content { position: relative; z-index: 1; }
@@ -44,47 +47,54 @@
   /* HEADER */
   header {
     text-align: center;
-    padding: 3rem 1rem 1rem;
+    padding: 3rem 1rem 1.5rem;
+    animation: fadeInDown 0.8s ease;
   }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .logo-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(240,192,64,0.1);
-    border: 1px solid rgba(240,192,64,0.3);
+    background: rgba(255,204,0,0.12);
+    border: 1px solid rgba(255,204,0,0.35);
     border-radius: 999px;
-    padding: 6px 18px;
-    font-size: 13px;
+    padding: 6px 20px;
+    font-size: 12px;
     color: var(--accent);
-    margin-bottom: 1.5rem;
-    letter-spacing: 2px;
+    margin-bottom: 1.2rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
   }
+
   h1 {
     font-family: 'Tajawal', sans-serif;
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(2.8rem, 8vw, 5rem);
     font-weight: 900;
-    line-height: 1.1;
-    background: linear-gradient(135deg, #f0c040 0%, #ff9f43 40%, #ff6b35 100%);
+    background: linear-gradient(to right, #ffffff, #ffcc00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 0.5rem;
-  }
-  .subtitle {
-    font-size: 1.1rem;
-    color: var(--text2);
-    font-weight: 400;
+    margin-bottom: 0.4rem;
+    text-shadow: none;
   }
 
-  /* MAIN LAYOUT */
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text2);
+  }
+
+  /* MAIN GRID */
   .main-grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr 360px;
     gap: 2rem;
     max-width: 1100px;
-    margin: 2rem auto;
-    padding: 0 1.5rem 4rem;
+    margin: 1.5rem auto;
+    padding: 0 1.2rem 4rem;
     align-items: start;
   }
 
@@ -93,24 +103,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
   .wheel-wrapper {
     position: relative;
-    width: 400px;
-    height: 400px;
-    filter: drop-shadow(0 0 60px rgba(240,192,64,0.2));
+    width: min(420px, 88vw);
+    height: min(420px, 88vw);
   }
 
   #wheelCanvas {
+    width: 100% !important;
+    height: 100% !important;
+    border: 8px solid var(--glass2);
     border-radius: 50%;
+    box-shadow:
+      0 0 60px rgba(110,142,251,0.25),
+      0 0 120px rgba(167,119,227,0.15),
+      0 0 20px var(--glow);
   }
 
+  /* POINTER — LEFT side */
   .pointer-wrap {
     position: absolute;
     top: 50%;
-    left: -30px;
+    left: -28px;
     transform: translateY(-50%);
     z-index: 10;
   }
@@ -118,8 +135,8 @@
     width: 0; height: 0;
     border-top: 18px solid transparent;
     border-bottom: 18px solid transparent;
-    border-left: 36px solid var(--accent);
-    filter: drop-shadow(0 0 8px var(--accent));
+    border-left: 34px solid var(--accent);
+    filter: drop-shadow(0 0 8px rgba(255,204,0,0.7));
   }
 
   .center-dot {
@@ -136,20 +153,21 @@
 
   /* SPIN BTN */
   .spin-btn {
-    position: relative;
-    padding: 16px 60px;
+    padding: 16px 64px;
     font-size: 1.2rem;
     font-family: 'Tajawal', sans-serif;
     font-weight: 700;
     border: none;
-    border-radius: 999px;
+    border-radius: 12px;
     cursor: pointer;
-    overflow: hidden;
-    background: linear-gradient(135deg, #f0c040, #ff6b35);
-    color: #0a0a0f;
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 5px 20px rgba(255,204,0,0.45);
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 8px 32px rgba(240,192,64,0.35);
     letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
   }
   .spin-btn::before {
     content: '';
@@ -160,23 +178,25 @@
     transition: left 0.5s;
   }
   .spin-btn:hover::before { left: 100%; }
-  .spin-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(240,192,64,0.5); }
+  .spin-btn:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255,204,0,0.6); }
   .spin-btn:active { transform: scale(0.97); }
-  .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .spin-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
   /* WINNER DISPLAY */
   .winner-display {
     width: 100%;
-    max-width: 400px;
-    background: linear-gradient(135deg, rgba(240,192,64,0.08), rgba(255,107,53,0.05));
-    border: 1px solid rgba(240,192,64,0.25);
+    max-width: 420px;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 20px 24px;
+    padding: 20px 28px;
     text-align: center;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.4s, transform 0.4s;
     pointer-events: none;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
   }
   .winner-display.show {
     opacity: 1;
@@ -192,9 +212,9 @@
   }
   .winner-name {
     font-family: 'Tajawal', sans-serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #f0c040, #ff6b35);
+    background: linear-gradient(to right, #fff, #ffcc00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -222,21 +242,24 @@
   .sidebar {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.2rem;
   }
 
   .panel {
-    background: var(--bg2);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    animation: fadeInDown 0.8s ease;
   }
 
   .panel-title {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--accent);
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     margin-bottom: 1rem;
     display: flex;
@@ -259,32 +282,35 @@
   }
   .name-input {
     flex: 1;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 10px 14px;
+    background: rgba(255,255,255,0.05);
+    border: none;
+    border-bottom: 2px solid var(--accent);
+    border-radius: 10px 10px 0 0;
+    padding: 11px 14px;
     color: var(--text);
     font-family: 'Cairo', sans-serif;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: background 0.2s;
     direction: rtl;
   }
-  .name-input:focus { border-color: rgba(240,192,64,0.5); }
+  .name-input:focus { background: rgba(255,255,255,0.09); }
+  .name-input::placeholder { color: var(--text2); }
+
   .add-btn {
-    padding: 10px 18px;
-    background: var(--accent);
-    color: #0a0a0f;
-    border: none;
-    border-radius: 12px;
+    padding: 11px 18px;
+    background: rgba(255,204,0,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(255,204,0,0.3);
+    border-radius: 10px;
     font-family: 'Cairo', sans-serif;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
+    transition: background 0.2s, transform 0.15s;
     white-space: nowrap;
   }
-  .add-btn:hover { opacity: 0.85; transform: scale(1.03); }
+  .add-btn:hover { background: rgba(255,204,0,0.25); transform: scale(1.04); }
 
   /* NAME TAGS */
   .names-grid {
@@ -308,9 +334,9 @@
     from { transform: scale(0.7); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
-  .name-tag.done { opacity: 0.3; text-decoration: line-through; }
+  .name-tag.done { opacity: 0.28; text-decoration: line-through; }
   .name-tag button {
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.3);
     border: none;
     border-radius: 50%;
     width: 18px; height: 18px;
@@ -320,7 +346,51 @@
     display: flex; align-items: center; justify-content: center;
     transition: background 0.15s;
   }
-  .name-tag button:hover { background: rgba(0,0,0,0.5); }
+  .name-tag button:hover { background: rgba(0,0,0,0.55); }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-num {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    background: linear-gradient(to right, #fff, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { font-size: 12px; color: var(--text2); }
+
+  /* ACTIONS */
+  .action-row {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .ghost-btn {
+    flex: 1;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text2);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    text-align: center;
+  }
+  .ghost-btn:hover { border-color: rgba(255,204,0,0.4); color: var(--accent); background: rgba(255,204,0,0.06); }
+  .ghost-btn.danger:hover { border-color: rgba(255,80,80,0.5); color: #ff5050; background: rgba(255,80,80,0.06); }
 
   /* WINNERS LIST */
   .winners-list {
@@ -333,65 +403,24 @@
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    background: var(--bg3);
+    background: rgba(255,255,255,0.06);
     border-radius: 12px;
     font-size: 14px;
     font-weight: 600;
     animation: slideIn 0.35s ease;
+    border: 1px solid rgba(255,255,255,0.08);
   }
   @keyframes slideIn {
     from { transform: translateX(20px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
   }
   .rank-badge {
-    width: 24px; height: 24px;
+    width: 26px; height: 26px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 11px; font-weight: 700;
     flex-shrink: 0;
   }
-
-  .action-row {
-    display: flex; gap: 8px; flex-wrap: wrap;
-  }
-  .ghost-btn {
-    flex: 1;
-    padding: 9px 14px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--text2);
-    font-family: 'Cairo', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-    text-align: center;
-  }
-  .ghost-btn:hover { border-color: rgba(240,192,64,0.4); color: var(--accent); }
-  .ghost-btn.danger:hover { border-color: rgba(255,80,80,0.5); color: #ff5050; }
-
-  /* STATS */
-  .stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .stat-card {
-    background: var(--bg3);
-    border-radius: 14px;
-    padding: 14px;
-    text-align: center;
-  }
-  .stat-num {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #f0c040, #ff6b35);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .stat-label { font-size: 12px; color: var(--text2); }
 
   /* ALL DONE */
   .all-done-overlay {
@@ -399,7 +428,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 24px;
+    padding: 20px;
     text-align: center;
   }
   .all-done-overlay.show { display: flex; }
@@ -414,16 +443,60 @@
     color: var(--text2);
     font-size: 13px;
     opacity: 0.6;
+    width: 100%;
   }
 
   /* RESPONSIVE */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .main-grid {
       grid-template-columns: 1fr;
     }
-    .wheel-wrapper { width: 300px; height: 300px; }
     .wheel-area { order: 1; }
     .sidebar { order: 2; }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1.8rem 1rem 1rem; }
+    h1 { font-size: 2.4rem; }
+    .subtitle { font-size: 0.9rem; }
+    .logo-badge { font-size: 10px; padding: 5px 14px; }
+
+    .main-grid { gap: 1.2rem; padding: 0 0.8rem 3rem; margin-top: 1rem; }
+
+    .wheel-wrapper { width: min(340px, 92vw); height: min(340px, 92vw); }
+
+    .spin-btn { padding: 14px 40px; font-size: 1rem; width: 100%; max-width: 320px; }
+
+    .winner-display { padding: 16px 18px; }
+    .winner-name { font-size: 1.7rem; }
+
+    .panel { padding: 1.1rem; border-radius: 16px; }
+    .panel-title { font-size: 0.72rem; }
+
+    .input-row { gap: 6px; }
+    .name-input { font-size: 13px; padding: 10px 12px; }
+    .add-btn { padding: 10px 14px; font-size: 13px; }
+
+    .stat-num { font-size: 1.5rem; }
+    .stats-row { gap: 8px; }
+    .stat-card { padding: 12px 8px; }
+
+    .ghost-btn { font-size: 12px; padding: 9px 10px; }
+
+    .names-grid { gap: 6px; }
+    .name-tag { font-size: 12px; padding: 4px 6px 4px 10px; }
+
+    .winner-item { padding: 9px 12px; font-size: 13px; }
+
+    .pointer-wrap { left: -22px; }
+    .pointer { border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 28px solid var(--accent); }
+    .center-dot { width: 36px; height: 36px; }
+  }
+
+  @media (max-width: 380px) {
+    .wheel-wrapper { width: 90vw; height: 90vw; }
+    h1 { font-size: 2rem; }
+    .action-row { flex-direction: column; }
   }
 </style>
 </head>
@@ -442,12 +515,12 @@
     <!-- WHEEL -->
     <div class="wheel-area">
       <div class="wheel-wrapper">
-        <canvas id="wheelCanvas" width="400" height="400"></canvas>
         <div class="pointer-wrap"><div class="pointer"></div></div>
+        <canvas id="wheelCanvas" width="400" height="400"></canvas>
         <div class="center-dot"></div>
       </div>
 
-      <button class="spin-btn" id="spinBtn" onclick="spin()" disabled>🎯 لف!</button>
+      <button class="spin-btn" id="spinBtn" onclick="spin()" disabled>لف العجلة الآن! 🎯</button>
 
       <div class="winner-display" id="winnerDisplay">
         <div class="winner-label">🏆 الفائز هو</div>
@@ -520,7 +593,8 @@
   for (let i = 0; i < 80; i++) pts.push({
     x: Math.random()*innerWidth, y: Math.random()*innerHeight,
     r: Math.random()*1.5+0.3, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
-    a: Math.random()
+    a: Math.random(),
+    col: Math.random() > 0.5 ? '255,204,0' : '110,142,251'
   });
   function draw() {
     ctx.clearRect(0,0,W,H);
@@ -530,7 +604,7 @@
       if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(240,192,64,${p.a * 0.6})`;
+      ctx.fillStyle = `rgba(${p.col},${p.a * 0.5})`;
       ctx.fill();
     });
     requestAnimationFrame(draw);
@@ -548,7 +622,19 @@ const COLORS = [
 
 const canvas = document.getElementById('wheelCanvas');
 const ctx2 = canvas.getContext('2d');
-const R = 196, CX = 200, CY = 200;
+let CX = 200, CY = 200, R = 186;
+
+function resizeCanvas() {
+  const wrapper = document.querySelector('.wheel-wrapper');
+  const size = wrapper.offsetWidth;
+  canvas.width = size;
+  canvas.height = size;
+  CX = size / 2;
+  CY = size / 2;
+  R = size / 2 - 18;
+  drawWheel();
+}
+window.addEventListener('resize', resizeCanvas);
 
 let names = [];
 let remaining = [];
@@ -557,44 +643,40 @@ let angle = 0;
 let spinning = false;
 
 function drawWheel() {
-  ctx2.clearRect(0,0,400,400);
+  ctx2.clearRect(0, 0, canvas.width, canvas.height);
   const n = remaining.length;
   if (n === 0) { drawEmpty(); return; }
-  const slice = (2*Math.PI)/n;
+  const slice = (2 * Math.PI) / n;
 
   for (let i = 0; i < n; i++) {
     const [bg, fg] = COLORS[i % COLORS.length];
-    const s = angle + i*slice, e = s + slice;
+    const s = angle + i * slice, e = s + slice;
 
-    // Segment
     ctx2.beginPath();
-    ctx2.moveTo(CX,CY);
-    ctx2.arc(CX,CY,R,s,e);
+    ctx2.moveTo(CX, CY);
+    ctx2.arc(CX, CY, R, s, e);
     ctx2.closePath();
     ctx2.fillStyle = bg;
     ctx2.fill();
-
-    // Glow border
-    ctx2.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx2.strokeStyle = 'rgba(255,255,255,0.06)';
     ctx2.lineWidth = 1;
     ctx2.stroke();
 
-    // Text
     ctx2.save();
-    ctx2.translate(CX,CY);
-    ctx2.rotate(s + slice/2);
+    ctx2.translate(CX, CY);
+    ctx2.rotate(s + slice / 2);
     ctx2.textAlign = 'right';
     ctx2.fillStyle = fg;
-    ctx2.font = `600 ${n > 12 ? 11 : 13}px Cairo,sans-serif`;
-    const label = remaining[i].length > 10 ? remaining[i].slice(0,9)+'…' : remaining[i];
-    ctx2.fillText(label, R-14, 5);
+    const fontSize = n > 12 ? Math.max(9, R * 0.055) : n > 8 ? Math.max(10, R * 0.062) : Math.max(11, R * 0.07);
+    ctx2.font = `600 ${fontSize}px Cairo,sans-serif`;
+    const label = remaining[i].length > 10 ? remaining[i].slice(0, 9) + '…' : remaining[i];
+    ctx2.fillText(label, R - 12, 5);
     ctx2.restore();
   }
 
-  // Outer ring
   ctx2.beginPath();
-  ctx2.arc(CX,CY,R,0,2*Math.PI);
-  ctx2.strokeStyle = 'rgba(240,192,64,0.3)';
+  ctx2.arc(CX, CY, R, 0, 2 * Math.PI);
+  ctx2.strokeStyle = 'rgba(255,204,0,0.3)';
   ctx2.lineWidth = 2;
   ctx2.stroke();
 }
@@ -602,15 +684,18 @@ function drawWheel() {
 function drawEmpty() {
   ctx2.beginPath();
   ctx2.arc(CX,CY,R,0,2*Math.PI);
-  ctx2.fillStyle = '#1a1a26';
+  const g = ctx2.createRadialGradient(CX,CY,0,CX,CY,R);
+  g.addColorStop(0,'#1a1640');
+  g.addColorStop(1,'#0f0c29');
+  ctx2.fillStyle = g;
   ctx2.fill();
-  ctx2.strokeStyle = 'rgba(240,192,64,0.15)';
+  ctx2.strokeStyle = 'rgba(255,204,0,0.15)';
   ctx2.lineWidth = 2;
   ctx2.stroke();
-  ctx2.fillStyle = 'rgba(153,152,176,0.5)';
+  ctx2.fillStyle = 'rgba(255,255,255,0.35)';
   ctx2.font = '500 16px Cairo,sans-serif';
   ctx2.textAlign = 'center';
-  ctx2.fillText('أضف أسماء لتبدأ', CX, CY);
+  ctx2.fillText('أضف أسماء لتبدأ', CX, CY+6);
 }
 
 function addName() {
@@ -696,13 +781,14 @@ function spin() {
   const n = remaining.length;
   const slice = (2*Math.PI)/n;
   const winIdx = Math.floor(Math.random() * n);
-  // Win angle: pointer is at LEFT (angle=PI), so winning segment center = PI
-  const winCenter = winIdx * slice + slice/2;
+
+  // Pointer is on the RIGHT (angle = PI from canvas zero)
+  const winCenter = winIdx * slice + slice / 2;
   const target = Math.PI - winCenter;
-  const extra = (6 + Math.floor(Math.random()*4)) * 2 * Math.PI;
-  const startAngle = angle;
-  let delta = ((target - (startAngle % (2*Math.PI))) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
-  if (delta < 0.2) delta += 2*Math.PI;
+  const extra = (6 + Math.floor(Math.random() * 4)) * 2 * Math.PI;
+  const startAngle = angle % (2 * Math.PI);
+  let delta = ((target - startAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+  if (delta < 0.2) delta += 2 * Math.PI;
   const totalDelta = extra + delta;
 
   const dur = 4500 + Math.random()*1500;
@@ -730,19 +816,13 @@ function revealWinner(idx) {
   winners.push(name);
   remaining.splice(idx, 1);
 
-  // Show banner
-  const disp = document.getElementById('winnerDisplay');
   document.getElementById('winnerName').textContent = name;
-  disp.classList.add('show');
+  document.getElementById('winnerDisplay').classList.add('show');
 
-  // Confetti
   launchConfetti();
-
-  // Update tags & stats
   renderTags();
   updateStats();
 
-  // Show winners panel
   document.getElementById('winnersPanel').style.display = 'block';
   const list = document.getElementById('winnersList');
   const item = document.createElement('div');
@@ -786,7 +866,7 @@ function resetGame() {
 }
 
 function launchConfetti() {
-  const cols = ['#f0c040','#ff6b35','#7c3aed','#38bdf8','#4ade80','#f87171'];
+  const cols = ['#ffcc00','#6e8efb','#a777e3','#4ade80','#f87171','#38bdf8'];
   for (let i = 0; i < 60; i++) {
     setTimeout(() => {
       const el = document.createElement('div');
